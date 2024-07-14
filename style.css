@@ -12,8 +12,8 @@
 
 
 #hambtn {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   display: grid;
 }
 #hambtn:hover {
@@ -28,7 +28,7 @@
   display: block;
   position: relative;
   transition: all 0.4s var(--default-bezier);
-  width: 100%; height: 0.25em;
+  width: 100%; height: 0.5em;
   border-radius: 20px;
 }
 #hamicon::before, 
