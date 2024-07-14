@@ -45,3 +45,14 @@
 }
 #hamicon::before {top: 150%;}
 #hamicon::after {top: -150%;}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
