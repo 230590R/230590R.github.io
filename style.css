@@ -12,8 +12,8 @@
 
 
 #hambtn {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   display: grid;
 }
 #hambtn:hover {
@@ -21,18 +21,18 @@
 }
 
 
-#hamicon {
+.hamicon {
   margin: auto;
   content: '';
   background-color: var(--accent-primary);
   display: block;
   position: relative;
   transition: all 0.4s var(--default-bezier);
-  width: 100%; height: 0.5em;
+  width: 100%; height: 0.35em;
   border-radius: 20px;
 }
-#hamicon::before, 
-#hamicon::after {
+.hamicon::before, 
+.hamicon::after {
   background-color: var(--accent-primary);
   content: '';
   display: block;
@@ -41,10 +41,22 @@
   height: 100%;
   width: 100%;
   transition: all 0.5s var(--default-bezier);
-  border-radius: 20px;
+  transform: rotate(-180deg);
+  border-radius: 1em;
 }
-#hamicon::before {top: 150%;}
-#hamicon::after {top: -150%;}
+.hamicon::before {top: 150%;}
+.hamicon::after {top: -150%;}
+
+.hamicon-toggled {background:transparent;}
+.hamicon-toggled::before,
+.hamicon-toggled::after {
+  width: 100%; top: 0; height: 0.35em;
+}
+.hamicon-toggled::before {transform: rotate(-45deg);}
+.hamicon-toggled::after {transform: rotate(45deg);}
+
+
+
 
 nav ul {
   list-style-type: none;

@@ -24,6 +24,8 @@ let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
 let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
 let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
 
+let hamicon = document.querySelector(".hamicon");
+
 btnStart.addEventListener('click', () => {
   music.audio.play();
   bass.audio.play();
@@ -31,7 +33,7 @@ btnStart.addEventListener('click', () => {
 })
 
 btnHam.addEventListener('click', () => {
-  alert("bozo");
+  hamicon.classList.toggle("hamicon-toggled");
 })
 
 
