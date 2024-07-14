@@ -5,8 +5,8 @@ class MusicLayer {
     this.volume = volume;
     this.audio.volume = volume;
   }
-  Update() {
-    this.volume += (this.maxvolume - this.volume) * 0.01;
+  Update(dt) {
+    this.volume += (this.maxvolume - this.volume) * 5 * dt;
     this.audio.volume = this.volume;
   }
 }
@@ -18,6 +18,8 @@ let btnMusic = document.getElementById("music");
 let btnBass = document.getElementById("bass");
 let btnDrums = document.getElementById("drums");
 
+let btnHam = document.getElementById("hambtn");
+
 let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
 let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
 let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
@@ -28,7 +30,9 @@ btnStart.addEventListener('click', () => {
   drums.audio.play();
 })
 
-
+btnHam.addEventListener('click', () => {
+  alert("bozo");
+})
 
 
 btnMusic.addEventListener('click', function() { ToggleAudio(music, 0.25); });
@@ -41,17 +45,28 @@ function ToggleAudio(a, volume) {
     : 0;
 }
 
-
-function loop() {
-  requestAnimationFrame(loop);
-  music.Update();
-  bass.Update();
-  drums.Update();
+const deltatime = 0.006;
+function AppLoop(timestamp) {
+  UpdateLoop(deltatime);
+  // step into the next frame when frame time has elapsed
+  requestAnimationFrame(AppLoop);
 }
 
-requestAnimationFrame(loop);
 
-alert("bozo");
+function UpdateLoop(dt) {
+  music.Update(dt);
+  bass.Update(dt);
+  drums.Update(dt);
+  let dtelement = document.getElementById("dt");
+  dtelement.innerHTML = dt;
+}
+
+
+
+
+requestAnimationFrame(AppLoop);
+
+//alert("bozo");
 
 // while (true) {
 //   music.Update();

@@ -1,0 +1,46 @@
+:root {
+  --bg-primary: #252422;
+  --bg-secondary:  #333333; 
+  --accent-primary: #ee6055;
+  --accent-secondary: #ff9b85;
+  --light-primary: #fcfaf9ff;
+  --font-default:  #fcfaf9ff;
+  --font-light: #aaaaaa;
+
+  --default-bezier: cubic-bezier(0, 0, 0.13, 0.97);
+}
+
+
+#hambtn {
+  width: 20px;
+  height: 20px;
+  display: grid;
+}
+#hambtn:hover {
+  cursor: pointer;
+}
+
+
+#hamicon {
+  margin: auto;
+  content: '';
+  background-color: var(--accent-primary);
+  display: block;
+  position: relative;
+  transition: all 0.4s var(--default-bezier);
+  border: 0px;
+  width: 100%; height: 3px;
+}
+#hamicon::before, 
+#hamicon::after {
+  background-color: var(--accent-primary);
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: all 0.5s var(--default-bezier);
+}
+#hamicon::before {top: 175%;}
+#hamicon::after {top: -150%;}
