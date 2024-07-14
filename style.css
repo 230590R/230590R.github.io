@@ -75,6 +75,6 @@ nav li {
   width: 100%;
 }
 
-.container img {
+.container {
   object-fit: cover;
 } 
