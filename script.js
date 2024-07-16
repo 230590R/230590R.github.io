@@ -1,4 +1,10 @@
 /*jshint esversion: 6 */
+
+function Lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+
 class MusicLayer {
   constructor(filepath, maxvolume, volume = 0) {
     this.audio = new Audio(filepath);
@@ -34,6 +40,53 @@ class Cover {
   }
 }
 
+// class to handle rounded corners
+class Blob {
+  constructor(target, start, range, timer) {
+    this.start = Number(start);
+    this.borders = [start, start, start, start];
+    this.tBorders = [0, 0, 0, 0];
+
+    this.range = Number(range);
+    this.target = target;
+    this.timer = Number(timer);
+    this.elapsed = Number(timer);
+  }
+  Update(dt) {
+    this.elapsed += dt;
+
+    for (let i = 0; i < this.borders.length; i++) {
+      this.borders[i] += (this.tBorders[i] - this.borders[i]) * dt / this.timer;
+    }
+
+    this.target.style.borderRadius =
+      Math.floor(this.borders[0]) + "px " +
+      Math.floor(this.borders[1]) + "px " +
+      Math.floor(this.borders[2]) + "px " +
+      Math.floor(this.borders[3]) + "px";
+
+    
+    
+    
+    if (this.elapsed < this.timer)
+      return;
+    // randomize again
+    this.elapsed = 0;
+    for (let i = 0; i < this.tBorders.length; i++) {
+      let rand = -this.range + (Math.random() * this.range * 2);
+      this.tBorders[i] = this.start + rand;
+    }
+
+
+    
+    let targetborder =
+      // Math.floor(this.borders[0].toString()) + "px " +
+      // Math.floor(this.borders[1].toString()) + "px " +
+      // Math.floor(this.borders[2].toString()) + "px " +
+      Math.floor(this.borders[3].toString()) + "px";
+  }
+}
+
 let cover = new Cover();
 window.addEventListener('scroll', function () {
   cover.ScrollUpdate(window.scrollY);
@@ -47,6 +100,7 @@ let btnBass = document.getElementById("bass");
 let btnDrums = document.getElementById("drums");
 
 let btnHam = document.getElementById("hambtn");
+let hamblob = document.getElementById("hamblob");
 
 let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
 let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
@@ -60,8 +114,11 @@ btnStart.addEventListener('click', () => {
   drums.audio.play();
 });
 
+let navUL = document.querySelector("nav ul")
 btnHam.addEventListener('click', () => {
   hamicon.classList.toggle("hamicon-toggled");
+  hamblob.classList.toggle("hamblob-toggled");
+  navUL.classList.toggle("hidden");
 });
 
 
@@ -81,11 +138,18 @@ function AppLoop() {
 }
 
 
+
+let hamiconBlob = new Blob(btnHam, 20, 10, 0.5);
+let hamiconBeforeBlob = new Blob(hamblob, 30, 15, 0.5);
+
 function UpdateLoop(dt) {
   music.Update(dt);
   bass.Update(dt);
   drums.Update(dt);
+  hamiconBlob.Update(dt);
+  hamiconBeforeBlob.Update(dt);
 }
+
 
 
 

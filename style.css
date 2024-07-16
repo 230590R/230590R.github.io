@@ -18,6 +18,7 @@
 
   --bg-primary: var(--alice-blue);
   --accent-primary: var(--pale-azure);
+  --accent-secondary: var(--celeste);
 }
 
 body {
@@ -25,41 +26,100 @@ body {
 }
 
 
+nav {
+  position: fixed; 
+  top: 10px;
+  z-index: 1000;
+}
+
 #hambtn {
-  width: 35px;
-  height: 35px;
-  display: grid;
+  width: 40px;
+  height: 40px;
+  display: grid; justify-items: center; align-items: center;
+  background-color: var(--accent-primary);
+  transition: all 0.5s var(--default-bezier);
 }
 #hambtn:hover {
   cursor: pointer;
+}
+.hamblob {
+  content: '';
+  width: 50px; height: 50px;
+  position: absolute;
+  top: -5px; left: -5px;
+  background-color: var(--accent-secondary);
+  z-index: -100;
+  box-shadow: 5px 3px 5px rgba(0, 0, 0, .5);
+  transition: all 0.5s var(--default-bezier);
+  display: grid; justify-items: center; align-items: center;
+  
+}
+
+.hamblob-toggled {
+  width: 30vh; height:auto;
+  grid-template-rows: 50px 1fr 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media only screen and (min-width: 800px) {
+  .hamblob {grid-template-columns: 50px 1fr 20px;}
+  .hamblob-toggled {width: 60vw; height: 50px;}
+  #hamblob ul { grid-area: 1/2/1/2 !important; flex-wrap: nowrap !important;}
+  #hamblob button { padding: 0em; !important}
+}
+
+#hamblob ul {
+  z-index: 20000;
+  list-style-type: none;
+  
+  padding: 0;
+  overflow: visible; flex-wrap: wrap;
+  order: 1;
+  height: 75%;
+  display: flex;
+  width: 90%;
+  grid-area: 2/1/2/1;
+}
+
+#hamblob ul li {
+  flex: 100%;
+}
+
+#hamblob button {
+  width:100%; height: 100%;
+  padding: 1em 0em 1em 0em;
 }
 
 
 .hamicon {
   margin: auto;
   content: '';
-  background-color: var(--accent-primary);
+  background-color: var(--bg-primary);
   display: block;
   position: relative;
   transition: all 0.4s var(--default-bezier);
-  width: 100%; height: 0.35em;
+  width: 66%; height: 0.25em;
   border-radius: 20px;
 }
 .hamicon::before, 
 .hamicon::after {
-  background-color: var(--accent-primary);
+  background-color: var(--bg-primary);
   content: '';
   display: block;
   position: absolute;
   left: 0;
   height: 100%;
   width: 100%;
+  margin:auto;
   transition: all 0.5s var(--default-bezier);
   transform: rotate(-180deg);
   border-radius: 1em;
 }
-.hamicon::before {top: 150%;}
-.hamicon::after {top: -150%;}
+.hamicon::before {top: 175%;}
+.hamicon::after {top: -175%;}
 
 .hamicon-toggled {background:transparent;}
 .hamicon-toggled::before,
@@ -70,18 +130,6 @@ body {
 .hamicon-toggled::after {transform: rotate(45deg);}
 
 
-
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-nav li {
-  float: left;
-}
 
 
 #title-cover {
@@ -111,7 +159,7 @@ nav li {
 
 #title-cover h1 {
   position: relative;
-  font-size: 500%;
+  font-size: 400%;
   z-index: 10;
   top: -200px;
 }
