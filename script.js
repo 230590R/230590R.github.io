@@ -1,10 +1,6 @@
-/*jshint esversion: 6 */
+/*jshint esversion: 6*/
 
-function Lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
-
+// class representing each layer of BGM.
 class MusicLayer {
   constructor(filepath, maxvolume, volume = 0) {
     this.audio = new Audio(filepath);
@@ -12,6 +8,8 @@ class MusicLayer {
     this.volume = volume;
     this.audio.volume = volume;
   }
+
+  // eases the volume into the targeted volume
   Update(dt) {
     this.volume += (this.maxvolume - this.volume) * 5 * dt;
     this.audio.volume = this.volume;
@@ -19,19 +17,20 @@ class MusicLayer {
 }
 
 
-
 // class to encapsulate the cover parallax
 class Cover {
   constructor() {
+    // get the elements
     this.mountain = document.getElementById("title-mountain");
     this.ground = document.getElementById("title-ground");
     this.text = document.getElementById("title-h1");
     this.cover = document.getElementById("title-cover");
-    
     // define the position of the title, set it
     this.textTop = -250;
     this.text.style.top = this.textTop + 'px';
   }
+
+  // update function to be added to the scroll event listener
   ScrollUpdate(scrollY) {
     this.mountain.style.top = (scrollY * -0.75) + 'px';
     this.cover.style.top = (scrollY * -1) + 'px';
@@ -43,47 +42,41 @@ class Cover {
 // class to handle rounded corners
 class Blob {
   constructor(target, start, range, timer) {
-    this.start = Number(start);
+    // store the element to be changed
+    this.target = target;
+    // 4 element list of border radius floats
     this.borders = [start, start, start, start];
     this.tBorders = [0, 0, 0, 0];
-
-    this.range = Number(range);
-    this.target = target;
-    this.timer = Number(timer);
-    this.elapsed = Number(timer);
+    // variables to keep track of starting radius and range
+    this.start = start;
+    this.range = range;
+    // variables to keep track of internal timer
+    this.timer = timer;
+    this.elapsed = timer;
   }
-  Update(dt) {
-    this.elapsed += dt;
 
+  Update(dt) {
+    // tick up elapsed time
+    this.elapsed += dt;
+    // interpolate to the target size
     for (let i = 0; i < this.borders.length; i++) {
       this.borders[i] += (this.tBorders[i] - this.borders[i]) * dt / this.timer;
     }
-
+    // snap to the nearest pixel, set the element's border-radius
     this.target.style.borderRadius =
       Math.floor(this.borders[0]) + "px " +
       Math.floor(this.borders[1]) + "px " +
       Math.floor(this.borders[2]) + "px " +
       Math.floor(this.borders[3]) + "px";
-
     
-    
-    
-    if (this.elapsed < this.timer)
-      return;
-    // randomize again
-    this.elapsed = 0;
-    for (let i = 0; i < this.tBorders.length; i++) {
-      let rand = -this.range + (Math.random() * this.range * 2);
-      this.tBorders[i] = this.start + rand;
+    // randomise a new target when timer is up
+    if (this.elapsed >= this.timer) {
+      for (let i = 0; i < this.tBorders.length; i++) {
+        let rand = -(0.5 * this.range) + (Math.random() * this.range);
+        this.tBorders[i] = this.start + rand;
+      }
+      this.elapsed = 0;
     }
-
-
-    
-    let targetborder =
-      // Math.floor(this.borders[0].toString()) + "px " +
-      // Math.floor(this.borders[1].toString()) + "px " +
-      // Math.floor(this.borders[2].toString()) + "px " +
-      Math.floor(this.borders[3].toString()) + "px";
   }
 }
 
@@ -114,7 +107,7 @@ btnStart.addEventListener('click', () => {
   drums.audio.play();
 });
 
-let navUL = document.querySelector("nav ul")
+let navUL = document.querySelector("nav ul");
 btnHam.addEventListener('click', () => {
   hamicon.classList.toggle("hamicon-toggled");
   hamblob.classList.toggle("hamblob-toggled");
@@ -137,10 +130,8 @@ function AppLoop() {
   requestAnimationFrame(AppLoop);
 }
 
-
-
-let hamiconBlob = new Blob(btnHam, 20, 10, 0.5);
-let hamiconBeforeBlob = new Blob(hamblob, 30, 15, 0.5);
+let hamiconBlob = new Blob(btnHam, 20, 20, 0.25);
+let hamiconBeforeBlob = new Blob(hamblob, 30, 30, 0.5);
 
 function UpdateLoop(dt) {
   music.Update(dt);
@@ -149,10 +140,6 @@ function UpdateLoop(dt) {
   hamiconBlob.Update(dt);
   hamiconBeforeBlob.Update(dt);
 }
-
-
-
-
 
 requestAnimationFrame(AppLoop);
 

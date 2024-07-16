@@ -51,7 +51,7 @@ nav {
   z-index: -100;
   box-shadow: 5px 3px 5px rgba(0, 0, 0, .5);
   transition: all 0.5s var(--default-bezier);
-  display: grid; justify-items: center; align-items: center;
+  display: grid; justify-items: center; align-items: top;
   
 }
 
@@ -65,9 +65,11 @@ nav {
 }
 
 @media only screen and (min-width: 800px) {
-  .hamblob {grid-template-columns: 50px 1fr 20px;}
+  .hamblob {grid-template-columns: 50px 1fr 20px; justify-items: left; align-items: center;}
   .hamblob-toggled {width: 60vw; height: 50px;}
-  #hamblob ul { grid-area: 1/2/1/2 !important; flex-wrap: nowrap !important; margin: auto !important;}
+  #hamblob ul {
+    grid-area: 1/2/1/2 !important; 
+    flex-wrap: nowrap !important; margin: 0 !important; width:100% !important;}
   #hamblob button { padding: 0em !important;}
 }
 
@@ -91,6 +93,12 @@ nav {
 #hamblob button {
   width:100%; height: 100%;
   padding: 1em 0em 1em 0em;
+  background-color: var(--bg-primary);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#hamblob button:hover {
+  background-color: var(--bg-secondary);
 }
 
 
