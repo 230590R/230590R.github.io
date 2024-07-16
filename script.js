@@ -65,3 +65,16 @@ function UpdateLoop(dt) {
 
 
 requestAnimationFrame(AppLoop);
+
+
+
+let mountain = document.getElementById("title-mountain");
+let ground = document.getElementById("title-ground");
+let text = document.getElementById("title-h1");
+let cover = document.getElementById("title-cover");
+window.addEventListener('scroll', function() {
+  var value = window.scrollY;
+  mountain.style.top = (value * -0.5) + 'px';
+  cover.style.top = (value * -1) + 'px';
+  text.style.top =  -200 + (value * 0.5) + 'px';
+})
