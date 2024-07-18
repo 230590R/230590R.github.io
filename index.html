@@ -10,12 +10,13 @@
 </head>
 
 <body>
-
+  <!--nav hamburger and buttons-->
   <nav>
+    <!--nav hamburger button and icon-->
     <div id="hambtn">
       <div class="hamicon"></div>
     </div>
-
+    <!--nav buttons-->
     <div id="hamblob" class="hamblob">
       <ul class="hidden">
         <li><button id="page1btn">Introduction</button></li>
@@ -25,13 +26,16 @@
     </div>
   </nav>
 
+  <!--title parallax-->
   <section id="title-cover">
     <img src="images/mountain.png" id="title-mountain">
     <img src="images/penguincutout.png" id="title-ground">
     <h1 id="title-h1">Penguins.</h1>
   </section>
   
+  <!--subpage #1: introduction-->
   <section id="introduction" class="content">
+    <!--summary of penguins-->
     <article class="image">
       <img src="images/penguinchicks.jpg" title="Aren't they cute?" alt="Emperor Penguin Chicks">
       <div>
@@ -39,6 +43,7 @@
         <p>Penguins are a group of aquatic flightless birds from the family Spheniscidae. They live almost exclusively in the Southern Hemisphere, in other words, the Antarctic! They have a cute appearance, sporting their signature black-and-white plumage and flippers. They feed on krill, fish, squid, and other sea life - hunting in the sea and spending the rest of their time on land. Standing 1.1 meters tall and weighing 35 kilos on average, penguins sure look cute!</p>
       </div>
     </article>
+    <!--nihilist penguin video-->
     <article class="embed">
       <iframe src="https://www.youtube.com/embed/mnTU_hJoByA?si=kI9BQd4Mt4DVm1i2" title="Nihilist Penguin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <div>
@@ -47,12 +52,22 @@
         <p>"Out of a swarm of penguins heading to the mating grounds a lone dissenter makes make a sharp right and head towards the mountains in a full-speed waddle. It's explained that this penguin has become confused and will head for that mountain with the same vigour with which he pursued the promise of procreation, until he reaches his goal or dies. Isn't insanity a human trait?"</p>
       </div>
     </article>
-
+        <!--grieving penguin video-->
+        <article class="embed">
+          <iframe src="https://www.youtube.com/embed/MLdLyzoj1Uc?si=RE8zjt3vSsXjGiiK" title="Nihilist Penguin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div>
+            <h2>Grieving Penguin Mothers</h2>
+            <p>After losing their chicks, some penguin mothers may be urged to kidnap other chicks as a form of grieving. This behaviour is thought to be caused by their strong maternal instincts to raise the young; in a fit of inconsolable grief they seek out other chicks. Sadly, as the initial urge wears off, the bereft penguin mother will realise the kidnapped chick is not hers, and it will be abandoned. As grieving mothers chase the chick, it is also at risk of being smothered to death in the shuffle."</p>
+          </div>
+        </article>
   </section>
+
+  <!--subpage #2: species-->  
   <section id="species" class="hidden-subpage">
     <p>dt: <i id="dt"></i></p>
   </section>
 
+  <!--subpage #3: penguin customisation-->  
   <section id="game" class="hidden-subpage">
     <button id="start">Start audio</button><br>
     <button id="music">Toggle Music</button>
@@ -60,9 +75,10 @@
     <button id="drums">Toggle Drums</button>
   </section>
 
+  
+  <!--footer: contains penguins-->  
   <footer>
     <h2>Penguins :D</h2>
-
   </footer>
   
 </body>

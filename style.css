@@ -23,7 +23,7 @@
 
 
   --white: #FBDCFF;
-  --alice-blue: #edf5fc;
+  --alice-blue: #d1f0fc;
   --pale-azure: #97dffc;
   --wendge: #605856;
   --celeste: #c5fffd;
@@ -42,18 +42,21 @@ body {
   color: var(--font-default);
 }
 
-
-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 20px;
-  background-color: red;
-  margin-top: auto;
-}
-
 h1, h2, h3, h4 {
   font-family: Madimi;
 }
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  grid-template-rows: 1fr 100px;
+  margin-top: auto;
+  background-color: var(--bg-secondary);
+}
+
+footer h2 { margin: 10px auto 5px 20px;}
+
+
 
 body section {
   flex: 100%;
@@ -196,6 +199,7 @@ nav {
   justify-content: center;
   align-items: center;
   z-index: 900;
+  background-color: var(--bg-primary);
 }
 #title-cover::after {
   content: '';
