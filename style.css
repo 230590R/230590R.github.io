@@ -23,8 +23,21 @@
 
 body {
   background-color: var(--bg-primary);
+  display: flex; flex-wrap: wrap;
 }
 
+body section {
+  flex: 100%;
+  transform: translate(0px, 0px);
+  transition: all 1s var(--default-bezier);
+}
+
+.hidden-subpage {
+  transform: translate(0, calc(-100% - 100vh));
+  height: 0px;
+  transition: all 1s var(--default-bezier);
+  opacity: 0;
+}
 
 nav {
   position: fixed; 

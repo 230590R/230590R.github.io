@@ -33,7 +33,7 @@ class Cover {
   // update function to be added to the scroll event listener
   ScrollUpdate(scrollY) {
     this.mountain.style.top = (scrollY * -0.75) + 'px';
-    this.cover.style.top = (scrollY * -1) + 'px';
+    //this.cover.style.top = (scrollY * -1) + 'px';
     let textPos = this.textTop + (scrollY * 0.005 * Math.abs(this.textTop));
     this.text.style.top = Math.min(textPos, 200) + 'px';
   }
@@ -80,6 +80,13 @@ class Blob {
   }
 }
 
+// class to encapsulate navbar 
+class Nav {
+  constructor() {
+    
+  }
+}
+
 let cover = new Cover();
 window.addEventListener('scroll', function () {
   cover.ScrollUpdate(window.scrollY);
@@ -95,13 +102,36 @@ let btnDrums = document.getElementById("drums");
 let btnHam = document.getElementById("hambtn");
 let hamblob = document.getElementById("hamblob");
 
+
+
+
 let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
 let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
 let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
 
 let hamicon = document.querySelector(".hamicon");
 
-btnStart.addEventListener('click', () => {
+
+// nav buttons
+let btnIntro = document.getElementById("page1btn");
+let btnSpecies = document.getElementById("page2btn");
+let btnGame = document.getElementById("page3btn");
+btnIntro.addEventListener('click', function () {
+  let section = document.getElementById("introduction");
+  section.classList.toggle("hidden-subpage");
+});
+btnSpecies.addEventListener('click', function () {
+  let section = document.getElementById("species");
+  section.classList.toggle("hidden-subpage");
+});
+btnGame.addEventListener('click', function () {
+  let section = document.getElementById("game");
+  section.classList.toggle("hidden-subpage");
+});
+
+
+
+btnStart.addEventListener('click', function() {
   music.audio.play();
   bass.audio.play();
   drums.audio.play();
