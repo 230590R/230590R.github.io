@@ -68,7 +68,7 @@ class Blob {
       Math.floor(this.borders[1]) + "px " +
       Math.floor(this.borders[2]) + "px " +
       Math.floor(this.borders[3]) + "px";
-    
+
     // randomise a new target when timer is up
     if (this.elapsed >= this.timer) {
       for (let i = 0; i < this.tBorders.length; i++) {
@@ -80,74 +80,126 @@ class Blob {
   }
 }
 
-// class to encapsulate navbar 
-class Nav {
-  constructor() {
-    
-  }
-}
 
 let cover = new Cover();
 window.addEventListener('scroll', function () {
   cover.ScrollUpdate(window.scrollY);
 });
 
+let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
+let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
+let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
 
-// define buttons
+// class to encapsulate navbar functionality
+class Navbar {
+  constructor() {
+    // hamburger elements
+    let btnHam = document.getElementById("hambtn");
+    let hamblob = document.getElementById("hamblob");
+    let hamicon = document.querySelector(".hamicon");
+    // init nav event listener
+    let navUL = document.querySelector("nav ul");
+    btnHam.addEventListener('click', () => {
+      hamicon.classList.toggle("hamicon-toggled");
+      hamblob.classList.toggle("hamblob-toggled");
+      navUL.classList.toggle("hidden");
+    });
+    // create the hamicon blob
+    this.hamiconBlob = new Blob(btnHam, 20, 20, 0.25);
+    this.hamiconBeforeBlob = new Blob(hamblob, 30, 30, 0.5);
+    // subpage elements
+    this.subpages = [
+      document.getElementById("introduction"),
+      document.getElementById("species"),
+      document.getElementById("game"),
+    ];
+  }
+  ToggleSubpage(index) {
+    // hide all other subpages
+    for (let i = 0; i < this.subpages.length; i++) {
+      this.subpages[i].classList.add("hidden-subpage");
+    }
+    this.subpages[index].classList.remove("hidden-subpage");
+    document.getElementById("title-cover").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    
+    if (index == 0) {
+      music.maxvolume = 0;
+      bass.maxvolume = 1;
+      drums.maxvolume = 0;
+    }
+    else if (index == 1) {
+      music.maxvolume = 1;
+      bass.maxvolume = 1;
+      drums.maxvolume = 0;
+    }
+    else if (index == 2) {
+      music.maxvolume = 1;
+      bass.maxvolume = 1;
+      drums.maxvolume = 1;
+    }
+
+  }
+  Update(dt) {
+    this.hamiconBlob.Update(dt);
+    this.hamiconBeforeBlob.Update(dt);
+  }
+}
+
+
+let navbar = new Navbar();
+
+let btnIntro = document.getElementById("page1btn");
+let btnSpecies = document.getElementById("page2btn");
+let btnGame = document.getElementById("page3btn");
+
+btnIntro.addEventListener('click', function () {
+  navbar.ToggleSubpage(0);
+  btnIntro.classList.add("button-toggled");
+  btnSpecies.classList.remove("button-toggled");
+  btnGame.classList.remove("button-toggled");
+});
+
+btnSpecies.addEventListener('click', function () {
+  navbar.ToggleSubpage(1);
+  btnIntro.classList.remove("button-toggled");
+  btnSpecies.classList.add("button-toggled");
+  btnGame.classList.remove("button-toggled");
+});
+
+btnGame.addEventListener('click', function () {
+  navbar.ToggleSubpage(2);
+  btnIntro.classList.remove("button-toggled");
+  btnSpecies.classList.remove("button-toggled");
+  btnGame.classList.add("button-toggled");
+});
+
+
 let btnStart = document.getElementById("start");
 let btnMusic = document.getElementById("music");
 let btnBass = document.getElementById("bass");
 let btnDrums = document.getElementById("drums");
 
-let btnHam = document.getElementById("hambtn");
-let hamblob = document.getElementById("hamblob");
 
 
 
 
-let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
-let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
-let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
-
-let hamicon = document.querySelector(".hamicon");
 
 
-// nav buttons
-let btnIntro = document.getElementById("page1btn");
-let btnSpecies = document.getElementById("page2btn");
-let btnGame = document.getElementById("page3btn");
-btnIntro.addEventListener('click', function () {
-  let section = document.getElementById("introduction");
-  section.classList.toggle("hidden-subpage");
-});
-btnSpecies.addEventListener('click', function () {
-  let section = document.getElementById("species");
-  section.classList.toggle("hidden-subpage");
-});
-btnGame.addEventListener('click', function () {
-  let section = document.getElementById("game");
-  section.classList.toggle("hidden-subpage");
-});
-
-
-
-btnStart.addEventListener('click', function() {
+btnStart.addEventListener('click', function () {
   music.audio.play();
   bass.audio.play();
   drums.audio.play();
 });
 
-let navUL = document.querySelector("nav ul");
-btnHam.addEventListener('click', () => {
-  hamicon.classList.toggle("hamicon-toggled");
-  hamblob.classList.toggle("hamblob-toggled");
-  navUL.classList.toggle("hidden");
-});
+document.addEventListener("DOMContentLoaded", function(event){
+  music.audio.play();
+  bass.audio.play();
+  drums.audio.play();
+})
 
-
-btnMusic.addEventListener('click', function() { ToggleAudio(music, 0.25); });
-btnBass.addEventListener('click', function() { ToggleAudio(bass, 1); });
-btnDrums.addEventListener('click', function() { ToggleAudio(drums, 0.25); });
+btnMusic.addEventListener('click', function () { ToggleAudio(music, 0.25); });
+btnBass.addEventListener('click', function () { ToggleAudio(bass, 1); });
+btnDrums.addEventListener('click', function () { ToggleAudio(drums, 0.25); });
 
 function ToggleAudio(a, volume) {
   a.maxvolume = (a.maxvolume == 0) ? volume : 0;
@@ -160,16 +212,11 @@ function AppLoop() {
   requestAnimationFrame(AppLoop);
 }
 
-let hamiconBlob = new Blob(btnHam, 20, 20, 0.25);
-let hamiconBeforeBlob = new Blob(hamblob, 30, 30, 0.5);
-
 function UpdateLoop(dt) {
   music.Update(dt);
   bass.Update(dt);
   drums.Update(dt);
-  hamiconBlob.Update(dt);
-  hamiconBeforeBlob.Update(dt);
+  navbar.Update(dt);
 }
 
 requestAnimationFrame(AppLoop);
-
