@@ -81,6 +81,16 @@ class Blob {
 }
 
 
+// class to encapsulate slider functionality 
+class Slider {
+  constructor() {
+    const slides = document.querySelectorAll(".slides .slide");
+    console.log(slides);
+  }
+}
+
+let slider = new Slider();
+
 let cover = new Cover();
 window.addEventListener('scroll', function () {
   cover.ScrollUpdate(window.scrollY);
@@ -114,14 +124,28 @@ class Navbar {
       document.getElementById("game"),
     ];
   }
+
+  // to be invoked once after the transition is played
+  HideSubpages(index) {
+    // hide all other subpages
+    for (let i = 0; i < this.subpages.length; i++) {
+      if (i === index) continue;
+      this.subpages[i].classList.add("displaynone");
+    }
+    this.subpages[index].classList.remove("hidden-subpage");
+  }
+
   ToggleSubpage(index) {
     // hide all other subpages
     for (let i = 0; i < this.subpages.length; i++) {
       this.subpages[i].classList.add("hidden-subpage");
     }
-    this.subpages[index].classList.remove("hidden-subpage");
-    document.getElementById("title-cover").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    
+    this.subpages[index].classList.remove("displaynone");
+
+    // scroll to view
+    document.getElementById("content-anchor").scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
+  
+    // set the music
     if (index == 0) {
       music.maxvolume = 0;
       bass.maxvolume = 1;
@@ -157,6 +181,10 @@ btnIntro.addEventListener('click', function () {
   btnIntro.classList.add("button-toggled");
   btnSpecies.classList.remove("button-toggled");
   btnGame.classList.remove("button-toggled");
+
+  setTimeout(function () {
+    navbar.HideSubpages(0);
+  }, 201);
 });
 
 btnSpecies.addEventListener('click', function () {
@@ -164,6 +192,10 @@ btnSpecies.addEventListener('click', function () {
   btnIntro.classList.remove("button-toggled");
   btnSpecies.classList.add("button-toggled");
   btnGame.classList.remove("button-toggled");
+
+  setTimeout(function () {
+    navbar.HideSubpages(1);
+  }, 201);
 });
 
 btnGame.addEventListener('click', function () {
@@ -171,6 +203,11 @@ btnGame.addEventListener('click', function () {
   btnIntro.classList.remove("button-toggled");
   btnSpecies.classList.remove("button-toggled");
   btnGame.classList.add("button-toggled");
+
+  setTimeout(function () {
+    navbar.HideSubpages(2);
+  }, 201);
+
 });
 
 
@@ -181,21 +218,12 @@ let btnDrums = document.getElementById("drums");
 
 
 
-
-
-
-
 btnStart.addEventListener('click', function () {
   music.audio.play();
   bass.audio.play();
   drums.audio.play();
 });
 
-document.addEventListener("DOMContentLoaded", function(event){
-  music.audio.play();
-  bass.audio.play();
-  drums.audio.play();
-})
 
 btnMusic.addEventListener('click', function () { ToggleAudio(music, 0.25); });
 btnBass.addEventListener('click', function () { ToggleAudio(bass, 1); });

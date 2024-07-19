@@ -58,26 +58,44 @@ footer h2 { margin: 10px auto 5px 20px;}
 
 
 
-body section {
+section {
   flex: 100%;
   transform: translate(0px, 0px);
   transition: all 1s var(--default-bezier);
 }
 
+section:not(:first-of-type) {
+  padding-left: 10%; padding-right: 10%;
+}
+section > h2 {
+  font-size: 300%;
+}
+
 .hidden-subpage {
-  transform: translate(0, calc(-100% - 100vh));
-  height: 0px;
+  transform: translate(0, calc(-100% - 100vh)); 
   transition: all 1s var(--default-bezier);
   opacity: 0;
 }
 
+.displaynone {display:none}
+
+
+
+
+
+
+/***********************************/
+/*nav menu*/
+/***********************************/
 nav {
   position: fixed; 
   top: 10px; left: 10px;
   z-index: 1000;
 }
 
+/*hamburger menu button and icon*/
 #hambtn {
+
   width: 40px;
   height: 40px;
   display: grid; justify-items: center; align-items: center;
@@ -87,157 +105,124 @@ nav {
 #hambtn:hover {
   cursor: pointer;
 }
-.hamblob {
+.hamblob { /*nav menu background*/
   content: '';
   width: 50px; height: 50px;
-  position: absolute;
-  top: -5px; left: -5px;
-  background-color: var(--accent-secondary);
-  z-index: -100;
+  position: absolute; top: -5px; left: -5px;
   box-shadow: 5px 3px 5px rgba(0, 0, 0, .5);
-  transition: all 0.5s var(--default-bezier);
   display: grid; justify-items: center; align-items: center;
   grid-template-rows: 50px 1fr 20px;
-}
-
-.hamblob-toggled {
-  width: 30vh; height:auto;
+  background-color: var(--accent-secondary);
   transition: all 0.5s var(--default-bezier);
+  z-index: -100;
 }
-
-.hidden {
+.hamblob-toggled { width: 30vh; height:auto; transition: all 0.5s var(--default-bezier); }
+.hidden { /*to hid nav buttons smoothly*/
   width: 0px; height: 0px;
   transition: all 0.25s var(--default-bezier);
   opacity: 0;
 }
-
-@media only screen and (min-width: 800px) {
-  .hamblob {grid-template-columns: 50px 1fr 20px; justify-items: left; align-items: center;}
-  .hamblob-toggled {width: 60vw; height: 50px;}
-  #hamblob ul {
-    grid-area: 1/2/1/2 !important; 
-    flex-wrap: nowrap !important; margin: 0 !important; width:100% !important;}
-  #hamblob button { padding: 0em !important;}
-}
-
+/*nav menu buttons*/
 #hamblob ul {
-  z-index: 20000;
-  list-style-type: none;
-  margin: 0em auto 0.5em auto;
-  padding: 0;
+  display: flex; list-style-type: none;
   overflow: visible; flex-wrap: wrap;
-  order: 1;
-  height: 75%;
-  display: flex;
-  width: 90%;
+  margin: 0em auto 0.5em auto; padding: 0;
+  width: 90%; height: 75%;
   grid-area: 2/1/2/1;
+  z-index: 20000;
 }
-
-#hamblob ul li {
-  flex: 100%;
-}
-
+#hamblob ul li { flex: 100%;}
 #hamblob button {
   width:100%; height: 100%;
   padding: 1em 0em 1em 0em;
+  border: 1px solid var(--accent-primary); border-radius: 5px;
   background-color: var(--bg-primary);
-  border: 1px solid black;
-  border-radius: 5px;
   transition: all 0.25s var(--default-bezier);
 }
-#hamblob button:hover {
-  background-color: var(--bg-secondary);
-}
-.button-toggled {
+#hamblob button:hover, .button-toggled {
+  color: var(--bg-primary);
   background-color: var(--bg-secondary) !important;
   transition: all 0.25s var(--default-bezier);
 }
 
+/*nav bar responsive for >800*/
+@media only screen and (min-width: 800px) {
+  .hamblob { grid-template-columns: 50px 1fr 20px; justify-items: left; align-items: center;}
+  .hamblob-toggled { width: 60vw; height: 50px;}
+  #hamblob ul {
+    grid-area: 1/2/1/2; 
+    flex-wrap: nowrap; margin: 0; width:100%;}
+  #hamblob button { padding: 0em;}
+}
 
+
+
+/*untoggled hamicon state*/
 .hamicon {
-  margin: auto;
-  content: '';
-  background-color: var(--bg-primary);
-  display: block;
-  position: relative;
-  transition: all 0.4s var(--default-bezier);
+  content: '';   display: block;
   width: 66%; height: 0.25em;
-  border-radius: 20px;
+  position: relative; margin: auto;
+  border-radius: 2em;
+  background-color: var(--bg-primary);
+  transition: all 0.4s var(--default-bezier);
 }
 .hamicon::before, 
 .hamicon::after {
+  content: ''; display: block;
+  position: absolute; left: 0; margin:auto;
+  height: 100%; width: 100%;
+  border-radius: 2em;
   background-color: var(--bg-primary);
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  margin:auto;
-  transition: all 0.5s var(--default-bezier);
   transform: rotate(-180deg);
-  border-radius: 1em;
+  transition: all 0.5s var(--default-bezier);
 }
 .hamicon::before {top: 175%;}
 .hamicon::after {top: -175%;}
-
+/*toggled hamicon state*/
 .hamicon-toggled {background:transparent;}
 .hamicon-toggled::before,
-.hamicon-toggled::after {
-  width: 100%; top: 0; height: 0.35em;
-}
+.hamicon-toggled::after { width: 100%; top: 0; height: 0.35em; border-radius: 100%;}
 .hamicon-toggled::before {transform: rotate(-45deg);}
 .hamicon-toggled::after {transform: rotate(45deg);}
 
+/*empty invisible div for js to scroll to*/
+#content-anchor { content: ''; width: 0px; height: 0px; position: relative; top: -10em;}
 
+
+
+/***********************************/
+/*parallax scrolling title cover*/
+/***********************************/
 #title-cover {
   position: relative;
-  width: 100%; height: 100vh;
-  flex: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 900;
+  width: 100%; flex: 100vh;
+  display: flex; overflow: hidden;
+  justify-content: center; align-items: center;
   background-color: var(--bg-primary);
+  z-index: 900;
 }
 #title-cover::after {
   content: '';
-  position: absolute;
-  bottom: 0;
+  position: absolute; bottom: 0;
   width:100%; height: 25%;
   background: linear-gradient(to top, var(--bg-primary), transparent);
   z-index: 100;
 }
-
-#title-cover img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-#title-cover h1 {
-  position: relative;
-  font-size: 400%;
-  z-index: 10;
-  top: -200px;
-}
-
+#title-cover img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+#title-cover h1 { position: relative; font-size: 400%; z-index: 10; }
 #title-ground { z-index: 90; }
 
 
 
 
-
-
-
-.content .embed, .content .image {
+/***********************************/
+/*article style content*/
+/***********************************/
+.embed, .image {
   display: flex;
   flex-flow: row wrap;
 }
-.content .embed div {
+.embed div {
   order: -1;
 }
 .content a {
@@ -248,16 +233,16 @@ nav {
 }
 .content a:hover {color: var(--accent-primary); font-size: 1em;}
 
-.content .embed iframe {
+.embed iframe {
   flex: 100%; aspect-ratio: 16 / 9;
   border: 2px solid black;
   margin: 0px;
 }
-.content .embed > div, .content .image > div {
+.embed > div, .image > div {
   flex: 100%; padding-left: 1em;
 }
 
-.content .image img {
+.image img {
   flex:30%;
   max-height: 14em;
   overflow:hidden;
@@ -265,13 +250,13 @@ nav {
   object-fit:cover;
 }
 
-.content .image:nth-child(2), .content .embed:nth-child(2) {
+.content article:nth-child(odd){
   flex-direction: row-reverse;
 }
 
+
 @media screen and (min-width: 800px) {
   .content {
-    padding-left: 10%; padding-right: 10%;
   }
   .content .image img {
     max-height: 14em;
@@ -290,3 +275,24 @@ nav {
   .content .embed > div {flex: 100%; order: 1;}
 }
 
+
+/***********************************/
+/*slides*/
+/***********************************/
+.slider {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+.slider img {
+  width: 100%; max-height: 30em !important;
+}
+.slide .displayslide {
+  display: block;
+}
+.slider button {
+  width: 30px; height: 30px;
+  position: relative;
+  top: -100%;
+}
