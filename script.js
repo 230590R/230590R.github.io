@@ -84,12 +84,47 @@ class Blob {
 // class to encapsulate slider functionality 
 class Slider {
   constructor() {
-    const slides = document.querySelectorAll(".slides .slide");
-    console.log(slides);
+    this.slides = document.querySelectorAll(".slides .slide");
+    this.selectortitle = document.getElementById("species-name");
+    this.slidenames = ["Emperor Penguins", "Adelie Penguins", "roick"]
+    this.index = 0;
+
+    // hide all slides except the first
+    for (let i = 0; i < this.slides.length; i++) {
+      this.slides[i].classList.add("hiddenslide");
+    }
+    this.slides[this.index].classList.remove("hiddenslide");
+
   }
+  // function to move between slides, to be attached to the button event listener
+  Slide(offset) {
+    // store the index of the previous and next slides
+    let prev = this.index;
+
+    // change the index
+    this.index += offset;
+    if (this.index < 0) this.index = this.slides.length - 1;
+    else if (this.index >= this.slides.length) this.index = 0;
+
+    // hide the previous slide
+    this.slides[prev].classList.add("hiddenslide");
+
+    // show the current slide
+    this.slides[this.index].classList.remove("hiddenslide");
+    this.selectortitle.innerHTML = this.slidenames[this.index];
+  }
+
 }
 
 let slider = new Slider();
+
+document.querySelector(".slides .prev").addEventListener('click', function () {
+  slider.Slide(-1);
+});
+
+document.querySelector(".slides .next").addEventListener('click', function () {
+  slider.Slide(1);
+});
 
 let cover = new Cover();
 window.addEventListener('scroll', function () {

@@ -69,6 +69,7 @@ section:not(:first-of-type) {
 }
 section > h2 {
   font-size: 300%;
+  margin: 0px;
 }
 
 .hidden-subpage {
@@ -227,15 +228,16 @@ nav {
 }
 .content a {
   text-decoration: none;
-  color: var(--accent-secondary);
+  color: var(--accent-primary);
   font-size: 0.9em;
   transition: all 0.25s var(--default-bezier);
 }
-.content a:hover {color: var(--accent-primary); font-size: 1em;}
+.content a:hover {color: var(--accent-secondary); font-size: 1em;}
 
 .embed iframe {
   flex: 100%; aspect-ratio: 16 / 9;
-  border: 2px solid black;
+  border: 0px;
+  border-radius: 20px;
   margin: 0px;
 }
 .embed > div, .image > div {
@@ -248,6 +250,7 @@ nav {
   overflow:hidden;
   position: relative;
   object-fit:cover;
+  border-radius: 15px;
 }
 
 .content article:nth-child(odd){
@@ -256,8 +259,6 @@ nav {
 
 
 @media screen and (min-width: 800px) {
-  .content {
-  }
   .content .image img {
     max-height: 14em;
   }
@@ -279,6 +280,10 @@ nav {
 /***********************************/
 /*slides*/
 /***********************************/
+.selection-panel {
+  display: grid;
+  grid-template-columns: 30px 18em 30px;
+}
 .slider {
   position: relative;
   width: 100%;
@@ -288,11 +293,24 @@ nav {
 .slider img {
   width: 100%; max-height: 30em !important;
 }
-.slide .displayslide {
+.slide {
   display: block;
+  transition: all 1s var(--default-bezier);
+}
+.hiddenslide {
+  position: absolute;
+  transition: all 0.5s var(--default-bezier);
+  width: 0px; height: 0px;
+  transform: translate(0, 100vh);
 }
 .slider button {
-  width: 30px; height: 30px;
   position: relative;
-  top: -100%;
+  width: 30px; height: 30px;
+}
+
+#species-name {
+  display: inline;
+  width: auto;
+  margin: auto 0px auto 10px;
+  padding: 0;
 }
