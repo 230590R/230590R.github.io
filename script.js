@@ -86,7 +86,7 @@ class Slider {
   constructor() {
     this.slides = document.querySelectorAll(".slides .slide");
     this.selectortitle = document.getElementById("species-name");
-    this.slidenames = ["Emperor Penguins", "Adelie Penguins", "roick"]
+    this.slidenames = ["Emperor", "Adelie", "Rockhopper"]
     this.index = 0;
 
     // hide all slides except the first

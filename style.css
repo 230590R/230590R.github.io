@@ -46,16 +46,27 @@ h1, h2, h3, h4 {
   font-family: Madimi;
 }
 
-footer {
+/* footer {
   display: grid;
   grid-template-columns: 1fr 50px;
   grid-template-rows: 1fr 100px;
   margin-top: auto;
   background-color: var(--bg-secondary);
+} */
+
+footer {
+  height: 10em;
+  background-color: var(--bg-secondary);
+  position: relative;
 }
 
-footer h2 { margin: 10px auto 5px 20px;}
+footer h2 { 
+  position: relative;
+}
 
+footer .name {
+  position: absolute;
+}
 
 
 section {
