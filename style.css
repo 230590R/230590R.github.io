@@ -247,7 +247,7 @@ nav {
 .image img {
   flex:30%;
   max-height: 14em;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
   object-fit:cover;
   border-radius: 15px;
@@ -282,7 +282,8 @@ nav {
 /***********************************/
 .selection-panel {
   display: grid;
-  grid-template-columns: 30px 18em 30px;
+  width: 100%;
+  grid-template-columns: 30px 1fr 30px;
 }
 .slider {
   position: relative;
