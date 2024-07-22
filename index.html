@@ -93,6 +93,7 @@
           <button class="prev">&#10094;</button>
           <h3 id="species-name">Emperor Penguins!</h3>
           <button class="next">&#10095;</button>
+          <br>
         </div>
         <!--emperor penguins-->
         <div class="slide">
@@ -119,42 +120,58 @@
                 emperor penguin chick's first steps in the wild!</p>
             </div>
           </article>
-          <!--adelie penguins-->
-          <div class="slide">
-            <!--overview article-->
-            <article class="image">
-              <img src="images/adelie.jpg" title="Aren't they cute?" alt="Emperor Penguin Chicks">
-              <div>
-                <h2>Adelies <a href="https://en.wikipedia.org/wiki/Adélie_penguin" target="_blank">[Wikipedia]</a></h2>
-                <p>Common along the entire Antarctic coast, it is the most widespread species of penguins! Adelies,
-                  along with their Emperor friends, are the most southerly distributed penguins. They're a mid-sized
-                  bird, measuring 70-73cm in length and weighting 3.8-8.2kg.</p>
-              </div>
-            </article>
-            <!--video link-->
-            <article class="embed">
-              <iframe src="https://www.youtube.com/embed/Z7PlUGbsXlQ?si=23vWcr7g3_dPwO4H" title="Adelie saves chicks"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              <div>
-                <h2>Unlikely hero</h2>
-                <p>In this video, a group of Emperor chicks square off against a predator. Small and vulnerable, things don't go well for them: that is, until an Adelie penguin swoops to the rescue! A heartwarming tale and a beautiful example of altruism in the wild.</p>
-              </div>
-            </article>
-          </div>
 
         </div>
+
+        <!--adelie penguins-->
+        <div class="slide">
+          <!--overview article-->
+          <article class="image">
+            <img src="images/adelie.jpg" title="Aren't they cute?" alt="Adelie Penguins">
+            <div>
+              <h2>Adelies <a href="https://en.wikipedia.org/wiki/Adélie_penguin" target="_blank">[Wikipedia]</a></h2>
+              <p>Common along the entire Antarctic coast, it is the most widespread species of penguins! Adelies,
+                along with their Emperor friends, are the most southerly distributed penguins. They're a mid-sized
+                bird, measuring 70-73cm in length and weighting 3.8-8.2kg.</p>
+            </div>
+          </article>
+          <!--video link-->
+          <article class="embed">
+            <iframe src="https://www.youtube.com/embed/Z7PlUGbsXlQ?si=23vWcr7g3_dPwO4H" title="Adelie saves chicks"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div>
+              <h2>Unlikely hero</h2>
+              <p>In this video, a group of Emperor chicks square off against a predator. Small and vulnerable, things
+                don't go well for them: that is, until an Adelie penguin swoops to the rescue! A heartwarming tale and a
+                beautiful example of altruism in the wild.</p>
+            </div>
+          </article>
+        </div>
+
         <!--nothern rockhopper penguins-->
         <div class="slide">
+          <!--overview article-->
           <article class="image">
-            <img src="images/nothern rockhopper.jpg" title="Aren't they cute?" alt="Emperor Penguin Chicks">
+            <img src="images/nothern-rockhopper.jpg" title="Aren't they cute?" alt="Rockhopper Penguins">
             <div>
-              <h2>Penguins! <a href="https://en.wikipedia.org/wiki/Penguin" target="_blank">[Wikipedia]</a></h2>
-              <p>Penguins are a group of aquatic flightless birds from the family Spheniscidae. They live almost
-                exclusively in the Southern Hemisphere, in other words, the Antarctic! They have a cute appearance,
-                sporting their signature black-and-white plumage and flippers. They feed on krill, fish, squid, and
-                other sea life - hunting in the sea and spending the rest of their time on land. Standing 1.1 meters
-                tall and weighing 35 kilos on average, penguins sure look cute!</p>
+              <h2>Rockhoppers <a href="https://en.wikipedia.org/wiki/Rockhopper_penguin" target="_blank">[Wikipedia]</a>
+              </h2>
+              <p>Rockhoppers consist of three subspecies: the Southern, Eastern, and Nothern Rockhoppers. Rockhoppers
+                have their distinctive yellow and black spiky feathers on their heads, making them easily recognisable
+                among the other penguin species. Having adapted to the harsh rocky environment they live in, they are
+                unable to slide on their bellies like other penguins.</p>
+            </div>
+          </article>
+          <!--video link-->
+          <article class="embed">
+            <iframe src="https://www.youtube.com/embed/uh_jsNL6d_c?si=h4OU1spQQTkNdMKO" title="Adelie saves chicks"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div>
+              <h2>A treacherous climb</h2>
+              <p>Just as their namesake suggests, these penguins live in mountainous rocky areas. They have to climb up
+                rocky mountains, and here we can see the young learn to do exactly that!</p>
             </div>
           </article>
         </div>
@@ -166,33 +183,25 @@
   <!--subpage #3: penguin customisation-->
   <section id="game" class="">
     <h2>Add your own penguin!</h2>
-    <button id="start">Start audio</button><br>
-    <button id="music">Toggle Music</button>
-    <button id="bass">Toggle Bass</button>
-    <button id="drums">Toggle Drums</button>
-    
-
     <form action="#" onsubmit="return false">
       <div class="formbox">
+        <!--name-->
         <label for="pet-name">Name:</label>
         <input name="pet-name" id="pet-name" type="text" minlength="2" maxlength="8" placeholder="Mr Suen">
-  
+        <!--species-->
         <label for="pet-species">Species:</label>
         <select name="pet-species" id="pet-species">
           <option value="emperor">Emperor</option>
           <option value="adelie">Adelie</option>
           <option value="rockhopper">Rockhopper</option>
         </select>
-  
+        <!--age-->
         <label>Age:</label>
         <button name="pet-age" id="pet-age-selector">Adult</button>
         <br>
         <button id="submit">Submit!</button>
       </div>
-
-
     </form>
-
     <br><br>
   </section>
 
@@ -200,12 +209,9 @@
   <!--footer: contains penguins-->
   <footer>
     <h2>Penguins :D</h2>
-    <img src="images/footerbg.jpg" class="bg">
-    
-    <div class="penguin-container">
-
-    </div>
-
+    <img src="images/footerbg.jpg" class="bg" alt="Antarctic Mountains">
+    <div class="penguin-container"></div>
+    <img src="images/mobileQR.svg" id="qr" alt="QR Code">
   </footer>
 
 </body>

@@ -1,21 +1,4 @@
-/*jshint esversion: 6*/
-
-// class representing each layer of BGM.
-class MusicLayer {
-  constructor(filepath, maxvolume, volume = 0) {
-    this.audio = new Audio(filepath);
-    this.maxvolume = maxvolume;
-    this.volume = volume;
-    this.audio.volume = volume;
-  }
-
-  // eases the volume into the targeted volume
-  Update(dt) {
-    this.volume += (this.maxvolume - this.volume) * 5 * dt;
-    this.audio.volume = this.volume;
-  }
-}
-
+/*jshint esversion: 6 */
 
 // class to encapsulate the cover parallax
 class Cover {
@@ -33,7 +16,6 @@ class Cover {
   // update function to be added to the scroll event listener
   ScrollUpdate(scrollY) {
     this.mountain.style.top = (scrollY * -0.75) + 'px';
-    //this.cover.style.top = (scrollY * -1) + 'px';
     let textPos = this.textTop + (scrollY * 0.005 * Math.abs(this.textTop));
     this.text.style.top = Math.min(textPos, 200) + 'px';
   }
@@ -80,7 +62,6 @@ class Blob {
   }
 }
 
-
 // class to encapsulate slider functionality 
 class Slider {
   constructor() {
@@ -116,11 +97,10 @@ class Slider {
 
 }
 
-
 // class to represent penguin objects
 class Penguin {
   constructor(penguin, sprite) {
-    this.x = 200; this.y = 0; // position
+    this.x = 10; this.y = -20; // position
     this.tx = 200; this.ty = 100;
     this.flip = 1; // scale, -1 to flip 
     this.penguin = penguin; // reference to the element
@@ -153,6 +133,7 @@ class Penguin {
   }
 }
 
+// class to encapsulate footer functionality
 class Footer {
   constructor() {
     this.btnAge = document.getElementById("pet-age-selector");
@@ -191,14 +172,12 @@ class Footer {
 
     // create the penguin element, append the img and name
     let penguinElement = document.createElement('div');
-    penguinElement.classList.add("penguin")
+    penguinElement.classList.add("penguin");
     penguinElement.appendChild(img);
     penguinElement.appendChild(label);
 
     // append the penguin into the footer
     this.container.appendChild(penguinElement);
-
-    // add penguin into the list
     this.penguins.push(new Penguin(penguinElement, img));
   }
   // update function
@@ -206,41 +185,12 @@ class Footer {
     // read the form inputs and update variables
     this.name = this.inputName.value;
     this.species = this.inputSpecies.value;
-
     // update the position of all penguins
     for (let i = 0; i < this.penguins.length; i++) {
       this.penguins[i].Update(dt);
     }
   }
 }
-
-
-let footer = new Footer();
-
-footer.btnAge.addEventListener('click', function () { footer.ToggleAge(); });
-document.getElementById("submit").addEventListener('click', function () {
-  footer.ConstructPenguin();
-});
-
-
-let slider = new Slider();
-
-document.querySelector(".slides .prev").addEventListener('click', function () {
-  slider.Slide(-1);
-});
-
-document.querySelector(".slides .next").addEventListener('click', function () {
-  slider.Slide(1);
-});
-
-let cover = new Cover();
-window.addEventListener('scroll', function () {
-  cover.ScrollUpdate(window.scrollY);
-});
-
-let music = new MusicLayer("audio/bgm-music.mp3", 0.25, 0.25);
-let bass = new MusicLayer("audio/bgm-bass.mp3", 0, 0);
-let drums = new MusicLayer("audio/bgm-drums.mp3", 0, 0);
 
 // class to encapsulate navbar functionality
 class Navbar {
@@ -251,7 +201,7 @@ class Navbar {
     let hamicon = document.querySelector(".hamicon");
     // init nav event listener
     let navUL = document.querySelector("nav ul");
-    btnHam.addEventListener('click', () => {
+    btnHam.addEventListener('click', function () {
       hamicon.classList.toggle("hamicon-toggled");
       hamblob.classList.toggle("hamblob-toggled");
       navUL.classList.toggle("hidden");
@@ -287,23 +237,6 @@ class Navbar {
     // scroll to view
     document.getElementById("content-anchor").scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
   
-    // set the music
-    if (index == 0) {
-      music.maxvolume = 0;
-      bass.maxvolume = 1;
-      drums.maxvolume = 0;
-    }
-    else if (index == 1) {
-      music.maxvolume = 1;
-      bass.maxvolume = 1;
-      drums.maxvolume = 0;
-    }
-    else if (index == 2) {
-      music.maxvolume = 1;
-      bass.maxvolume = 1;
-      drums.maxvolume = 1;
-    }
-
   }
   Update(dt) {
     this.hamiconBlob.Update(dt);
@@ -311,78 +244,53 @@ class Navbar {
   }
 }
 
+// create the footer object, add the event listeners
+let footer = new Footer();
+footer.btnAge.addEventListener('click', function () { footer.ToggleAge(); });
+document.getElementById("submit").addEventListener('click', function () {footer.ConstructPenguin();});
 
+// create the slider object, add the event listeners
+let slider = new Slider();
+document.querySelector(".slides .prev").addEventListener('click', function () {slider.Slide(-1);});
+document.querySelector(".slides .next").addEventListener('click', function () {slider.Slide(1);});
+
+// create the cover object, add the event listeners
+let cover = new Cover();
+window.addEventListener('scroll', function () {cover.ScrollUpdate(window.scrollY);});
+
+// create the navbar and subpage buttons
 let navbar = new Navbar();
+let subpageButtons = [
+  document.getElementById("page1btn"),
+  document.getElementById("page2btn"),
+  document.getElementById("page3btn")
+];
 
-let btnIntro = document.getElementById("page1btn");
-let btnSpecies = document.getElementById("page2btn");
-let btnGame = document.getElementById("page3btn");
-
-btnIntro.addEventListener('click', function () {
-  navbar.ToggleSubpage(0);
-  btnIntro.classList.add("button-toggled");
-  btnSpecies.classList.remove("button-toggled");
-  btnGame.classList.remove("button-toggled");
-
-  setTimeout(function () {
-    navbar.HideSubpages(0);
-  }, 201);
-});
-
-btnSpecies.addEventListener('click', function () {
-  navbar.ToggleSubpage(1);
-  btnIntro.classList.remove("button-toggled");
-  btnSpecies.classList.add("button-toggled");
-  btnGame.classList.remove("button-toggled");
-
-  setTimeout(function () {
-    navbar.HideSubpages(1);
-  }, 201);
-});
-
-btnGame.addEventListener('click', function () {
-  navbar.ToggleSubpage(2);
-  btnIntro.classList.remove("button-toggled");
-  btnSpecies.classList.remove("button-toggled");
-  btnGame.classList.add("button-toggled");
-
-  setTimeout(function () {
-    navbar.HideSubpages(2);
-  }, 201);
-
-});
-
-
-let btnStart = document.getElementById("start");
-let btnMusic = document.getElementById("music");
-let btnBass = document.getElementById("bass");
-let btnDrums = document.getElementById("drums");
-
-
-
-btnStart.addEventListener('click', function () {
-  music.audio.play();
-  bass.audio.play();
-  drums.audio.play();
-});
-
-
-btnMusic.addEventListener('click', function () { ToggleAudio(music, 0.25); });
-btnBass.addEventListener('click', function () { ToggleAudio(bass, 1); });
-btnDrums.addEventListener('click', function () { ToggleAudio(drums, 0.25); });
-
-function ToggleAudio(a, volume) {
-  a.maxvolume = (a.maxvolume == 0) ? volume : 0;
+for (let n = 0; n < subpageButtons.length; n++) {
+  const i = n;   // functions declared within loops referencing an outer scoped variable may lead to confusing semantics
+  const nav = navbar;
+  const subpgbtn = subpageButtons;
+  // add event listeners for each button
+  subpageButtons[i].addEventListener('click', () => {
+    nav.ToggleSubpage(i);
+    for (let j = 0; j < subpgbtn.length; j++) {
+      if (j === i) subpgbtn[j].classList.add("button-toggled");
+      else subpgbtn[j].classList.remove("button-toggled");
+    }
+    setTimeout(function () { nav.HideSubpages(i); }, 201);
+  });
 }
 
-const deltatime = 0.006;
-function AppLoop() {
-  music.Update(deltatime);
-  bass.Update(deltatime);
-  drums.Update(deltatime);
 
-  navbar.Update(deltatime);
-  footer.Update(deltatime);
+let prevTimestamp = 0;
+function AppLoop(timestamp) {
+  // calculate dt
+  let dt = (timestamp - prevTimestamp) / 1000;
+  prevTimestamp = timestamp; 
+  
+  // update the necessary objects
+  navbar.Update(dt);
+  footer.Update(dt);
 
   // step into the next frame when frame time has elapsed
   requestAnimationFrame(AppLoop);
