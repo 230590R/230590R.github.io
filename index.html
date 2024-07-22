@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/spr-emperor-chick.png">
   <title>Test</title>
 </head>
 
@@ -82,7 +83,7 @@
   </section>
 
   <!--subpage #2: species-->
-  <section id="species" class="">
+  <section id="species" class="hidden-subpage displaynone">
     <h2>Penguin Species!</h2>
     <div class="slider">
       <!--reference for html: https://youtu.be/749ta0nvj8s?si=PNY06E2Ig3v9rn85; css and js are my own-->
@@ -90,7 +91,7 @@
         <!--button panel to select-->
         <div class="selection-panel">
           <button class="prev">&#10094;</button>
-          <h3 id="species-name">Emporer Penguins!</h3>
+          <h3 id="species-name">Emperor Penguins!</h3>
           <button class="next">&#10095;</button>
         </div>
         <!--emperor penguins-->
@@ -100,7 +101,7 @@
             <img src="images/emperor_penguin_chicks_0.jpg" title="Aren't they cute?" alt="Emperor Penguin Chicks">
             <div>
               <h2>Emperors <a href="https://en.wikipedia.org/wiki/Emperor_penguin" target="_blank">[Wikipedia]</a></h2>
-              <p>The tallest and heaviest species of penguins, Emporer Penguins stand between 100-120cm, averaging
+              <p>The tallest and heaviest species of penguins, Emperor Penguins stand between 100-120cm, averaging
                 115cm, and some even have a standing height reportedly reaching 150cm! They weigh from 22-45kg, and is
                 the only species that breeds during the Antarctic winter, trekking 50-120km over the Antarctic to
                 breeding colonies.</p>
@@ -115,7 +116,7 @@
               <h2>Emperor Penguin Chicks</h2>
               <p>Emperor penguins are popular among humans too! When people think of
                 penguins, they typically think of emperor penguin chicks, small round and cute. Here's a video on an
-                emporer penguin chick's first steps in the wild!</p>
+                emperor penguin chick's first steps in the wild!</p>
             </div>
           </article>
           <!--adelie penguins-->
@@ -126,7 +127,7 @@
               <div>
                 <h2>Adelies <a href="https://en.wikipedia.org/wiki/Adélie_penguin" target="_blank">[Wikipedia]</a></h2>
                 <p>Common along the entire Antarctic coast, it is the most widespread species of penguins! Adelies,
-                  along with their Emporer friends, are the most southerly distributed penguins. They're a mid-sized
+                  along with their Emperor friends, are the most southerly distributed penguins. They're a mid-sized
                   bird, measuring 70-73cm in length and weighting 3.8-8.2kg.</p>
               </div>
             </article>
@@ -137,7 +138,7 @@
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               <div>
                 <h2>Unlikely hero</h2>
-                <p>In this video, a group of Emporer chicks square off against a predator. Small and vulnerable, things don't go well for them: that is, until an Adelie penguin swoops to the rescue! A heartwarming tale and a beautiful example of altruism in the wild.</p>
+                <p>In this video, a group of Emperor chicks square off against a predator. Small and vulnerable, things don't go well for them: that is, until an Adelie penguin swoops to the rescue! A heartwarming tale and a beautiful example of altruism in the wild.</p>
               </div>
             </article>
           </div>
@@ -163,13 +164,36 @@
   </section>
 
   <!--subpage #3: penguin customisation-->
-  <section id="game" class="hidden-subpage displaynone">
+  <section id="game" class="">
     <h2>Add your own penguin!</h2>
     <button id="start">Start audio</button><br>
     <button id="music">Toggle Music</button>
     <button id="bass">Toggle Bass</button>
     <button id="drums">Toggle Drums</button>
     
+
+    <form action="#" onsubmit="return false">
+      <div class="formbox">
+        <label for="pet-name">Name:</label>
+        <input name="pet-name" id="pet-name" type="text" minlength="2" maxlength="8" placeholder="Mr Suen">
+  
+        <label for="pet-species">Species:</label>
+        <select name="pet-species" id="pet-species">
+          <option value="Emperor">Emperor</option>
+          <option value="Adelie">Adelie</option>
+          <option value="Rockhopper">Rockhopper</option>
+        </select>
+  
+        <label>Age:</label>
+        <button name="pet-age" id="pet-age-selector">Adult</button>
+        <img src="images/spr-adelie.png">
+        <br>
+        <button id="submit">Submit!</button>
+      </div>
+
+
+    </form>
+
     <br><br>
   </section>
 
@@ -177,6 +201,12 @@
   <!--footer: contains penguins-->
   <footer>
     <h2>Penguins :D</h2>
+    <img src="images/footerbg.jpg" class="bg">
+    
+    <div class="penguin-container">
+
+    </div>
+
   </footer>
 
 </body>

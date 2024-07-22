@@ -86,7 +86,7 @@ class Slider {
   constructor() {
     this.slides = document.querySelectorAll(".slides .slide");
     this.selectortitle = document.getElementById("species-name");
-    this.slidenames = ["Emperor", "Adelie", "Rockhopper"]
+    this.slidenames = ["Emperor", "Adelie", "Rockhopper"];
     this.index = 0;
 
     // hide all slides except the first
@@ -115,6 +115,113 @@ class Slider {
   }
 
 }
+
+
+// class to represent penguin objects
+class Penguin {
+  constructor(penguin, sprite) {
+    this.x = 200; this.y = 0; // position
+    this.tx = 200; this.ty = 100;
+    this.flip = 1; // scale, -1 to flip 
+    this.penguin = penguin; // reference to the element
+    this.sprite = sprite;
+    this.timer = 0;
+  }
+  // update function: update the penguin's position
+  Update(dt) {
+    // update the element to its target
+    this.x += (this.tx - this.x) * dt;
+    this.y += (this.ty - this.y) * dt;
+
+    // change the element pos, image rotate
+    let pos = "translate(" + Math.floor(this.x) + "px, " + Math.floor(this.y) + "px)"; 
+    this.penguin.style.transform = pos;
+    this.sprite.style.transform = "scale(" + this.flip + ", 1)";
+
+    this.timer -= dt;
+    if (this.timer <= 0)
+      this.NewWaypoint();
+  }
+  // 
+  NewWaypoint() {
+    let ww = window.innerWidth;
+    this.tx = 0 + (Math.random() * ww);
+    this.ty = 100 -(0.5 * 20) + (Math.random() * 40);
+    this.timer = 2;
+
+    this.flip = (this.x < this.tx) ? -1 : 1;
+  }
+}
+
+class Footer {
+  constructor() {
+    this.btnAge = document.getElementById("pet-age-selector");
+    this.container = document.querySelector(".penguin-container");
+    // variables for constructing
+    this.age = "adult";
+    this.species = "emperor";
+    this.name = "placeholder";
+    this.penguins = [];
+
+    this.inputName = document.getElementById("pet-name");
+    this.inputSpecies = document.getElementById("pet-species");
+    this.name = this.inputName.value;
+    this.species = this.inputSpecies.value;
+  }
+  ToggleAge() {
+    let tempAge = (this.btnAge.innerHTML === "Adult") ? "Chick" : "Adult";
+    this.btnAge.innerHTML = tempAge;
+    this.age = tempAge;
+  }
+
+  // penguin element constructor
+  ConstructPenguin() {
+    let filepath = "images/spr-" + this.species;
+    if (this.age === "Chick") filepath += "-chick";
+    filepath += ".png";
+
+    // create the image element
+    let img = document.createElement('img');
+    img.src = filepath;
+    img.alt = this.species + " " + this.age;
+
+    // create the name element
+    let label = document.createElement('p');
+    label.innerHTML = this.name;
+
+    // create the penguin element, append the img and name
+    let penguinElement = document.createElement('div');
+    penguinElement.classList.add("penguin")
+    penguinElement.appendChild(img);
+    penguinElement.appendChild(label);
+
+    // append the penguin into the footer
+    this.container.appendChild(penguinElement);
+
+    // add penguin into the list
+    this.penguins.push(new Penguin(penguinElement, img));
+  }
+  // update function
+  Update(dt) {
+    // read the form inputs and update variables
+    this.name = this.inputName.value;
+    this.species = this.inputSpecies.value;
+
+    // update the position of all penguins
+    for (let i = 0; i < this.penguins.length; i++) {
+      this.penguins[i].Update(dt);
+    }
+  }
+}
+
+
+let footer = new Footer();
+
+footer.btnAge.addEventListener('click', function () { footer.ToggleAge(); });
+document.getElementById("submit").addEventListener('click', function () {
+  footer.ConstructPenguin();
+});
+
 
 let slider = new Slider();
 
@@ -270,16 +377,15 @@ function ToggleAudio(a, volume) {
 
 const deltatime = 0.006;
 function AppLoop() {
-  UpdateLoop(deltatime);
+  music.Update(deltatime);
+  bass.Update(deltatime);
+  drums.Update(deltatime);
+
+  navbar.Update(deltatime);
+  footer.Update(deltatime);
+
   // step into the next frame when frame time has elapsed
   requestAnimationFrame(AppLoop);
-}
-
-function UpdateLoop(dt) {
-  music.Update(dt);
-  bass.Update(dt);
-  drums.Update(dt);
-  navbar.Update(dt);
 }
 
 requestAnimationFrame(AppLoop);

@@ -11,23 +11,15 @@
 
 
 :root {
-  --bg-primary: #252422;
-  --bg-secondary:  #333333; 
-  --accent-primary: #ee6055;
-  --accent-secondary: #ff9b85;
-  --light-primary: #fcfaf9ff;
-  --font-default:  #fcfaf9ff;
-  --font-light: #aaaaaa;
-
   --default-bezier: cubic-bezier(0, 0, 0.13, 0.97);
 
 
-  --white: #FBDCFF;
   --alice-blue: #d1f0fc;
   --pale-azure: #97dffc;
   --wendge: #605856;
   --celeste: #c5fffd;
 
+  --white: #f6f9fa;
   --bg-primary: var(--alice-blue);
   --accent-primary: var(--pale-azure);
   --accent-secondary: var(--celeste);
@@ -44,28 +36,6 @@ body {
 
 h1, h2, h3, h4 {
   font-family: Madimi;
-}
-
-/* footer {
-  display: grid;
-  grid-template-columns: 1fr 50px;
-  grid-template-rows: 1fr 100px;
-  margin-top: auto;
-  background-color: var(--bg-secondary);
-} */
-
-footer {
-  height: 10em;
-  background-color: var(--bg-secondary);
-  position: relative;
-}
-
-footer h2 { 
-  position: relative;
-}
-
-footer .name {
-  position: absolute;
 }
 
 
@@ -107,7 +77,6 @@ nav {
 
 /*hamburger menu button and icon*/
 #hambtn {
-
   width: 40px;
   height: 40px;
   display: grid; justify-items: center; align-items: center;
@@ -325,4 +294,114 @@ nav {
   width: auto;
   margin: auto 0px auto 10px;
   padding: 0;
+}
+
+
+/***********************************/
+/*game: add your own penguin*/
+/***********************************/
+.formbox {
+  background-color: var(--accent-secondary);
+  padding: 10px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 5em 1fr;
+  font-size: 1.25em;
+  background-color: var(--white);
+  border: 3px solid var(--accent-primary);  border-radius: 20px;
+}
+input, select, #game form button {
+  font-family: BalsamiqSans;
+  background-color: var(--white);
+  border: 2px solid var(--accent-primary);
+  border-radius: 4px;
+  grid-column: span 2;
+  margin: 0; padding: 5px;
+}
+
+#game form button { grid-column: span 1;   transition: all 0.15s var(--default-bezier); padding: 3px;}
+#game form button:hover, #game form button:active {
+  background-color: var(--accent-primary);
+  border: 2px solid var(--accent-secondary);  border-radius: 4px;
+  transition: all 0.15s var(--default-bezier);
+}
+
+/*preview*/
+.formbox > img {
+  grid-column: span 2;
+  height: 50px;
+}
+
+#submit { 
+  padding: 10px 0px 10px 0px !important;
+  font-size: 150%; font-family: Madimi;
+  color: var(--accent-primary) !important;
+  background-color: var(--accent-secondary) !important;
+  border: 5px solid var(--accent-primary) !important;  border-radius: 15px !important;
+  transition: all 0.5s var(--default-bezier) !important;
+  grid-column: span 2 !important;
+}
+#submit:hover, #submit:active { 
+  color: var(--accent-secondary) !important;
+  font-size: 175% !important;
+  background-color: var(--accent-primary) !important;
+  border: 5px solid var(--accent-secondary) !important;  border-radius: 15px !important;
+  transition: all 0.5s var(--default-bezier) !important;
+}
+/*implement my own checkbox*/
+
+@media screen and (min-width: 800px) {
+
+  input, select {
+    grid-column: span 1;
+  }
+  #submit { grid-column: span 2; }
+}
+
+
+
+
+
+
+
+/***********************************/
+/*footer: penguins*/
+/***********************************/
+footer {
+  height: 10em;
+  background-color: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+footer h2 { 
+  color: var(--accent-primary);
+
+  width: calc(100% - 0.5em); height: auto;
+  padding: 0.5em 0em 0.5em 0.5em;
+  margin: 0px;
+  position: absolute; top: 0;
+  z-index: 1000;
+  background-color: #33333390;
+}
+footer .bg {
+  position: absolute;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.penguin-container {
+  position: absolute;
+
+}
+.penguin {
+  position: absolute;
+  display: grid; grid-template-rows: 1fr 10px;
+}
+.penguin img {
+  width: 25px; height: auto;
+  transform: scale(-1, 1);
+}
+.penguin p {
+  margin: 0; padding: 0;
 }
