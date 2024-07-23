@@ -247,10 +247,58 @@ class Navbar {
   }
 }
 
+function EnterFullscreen() {
+  if (document.documentElement.requestFullscreen) // request fullscreen
+    document.documentElement.requestFullscreen();
+  else if (document.documentElement.mozRequestFullScreen) // firefox
+    document.documentElement.mozRequestFullScreen();
+  else if (document.documentElement.webkitRequestFullscreen) // chrome safari and opera
+    document.documentElement.webkitRequestFullscreen();
+  else if (document.documentElement.msRequestFullscreen) // internet explorer and edge
+    document.documentElement.msRequestFullscreen();
+
+}
+
+function ExitFullscreen() {
+  if (document.exitFullscreen) // request exit fullscreen
+    document.exitFullscreen();
+  else if (document.mozCancelFullScreen) // firefox
+    document.mozCancelFullScreen();
+  else if (document.webkitExitFullscreen) // chrome safari and opera
+    document.webkitExitFullscreen();
+  else if (document.msExitFullscreen)   // internet explorer and edge
+    document.msExitFullscreen();
+}
+
+function ToggleFullscreen() {
+  if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+    // exit fullscreen
+    if (document.exitFullscreen) // request exit fullscreen
+    document.exitFullscreen();
+  else if (document.mozCancelFullScreen) // firefox
+    document.mozCancelFullScreen();
+  else if (document.webkitExitFullscreen) // chrome safari and opera
+    document.webkitExitFullscreen();
+  else if (document.msExitFullscreen)   // internet explorer and edge
+    document.msExitFullscreen();
+  }
+  else {
+    // enter fullscreen
+    if (document.documentElement.requestFullscreen) // request fullscreen
+    document.documentElement.requestFullscreen();
+  else if (document.documentElement.mozRequestFullScreen) // firefox
+    document.documentElement.mozRequestFullScreen();
+  else if (document.documentElement.webkitRequestFullscreen) // chrome safari and opera
+    document.documentElement.webkitRequestFullscreen();
+  else if (document.documentElement.msRequestFullscreen) // internet explorer and edge
+    document.documentElement.msRequestFullscreen();
+  }
+}
 // create the footer object, add the event listeners
 let footer = new Footer();
 footer.btnAge.addEventListener('click', function () { footer.ToggleAge(); });
-document.getElementById("submit").addEventListener('click', function () {footer.ConstructPenguin();});
+document.getElementById("submit").addEventListener('click', function () { footer.ConstructPenguin(); });
+document.querySelector("footer h2").addEventListener('click', ToggleFullscreen);
 
 // create the slider object, add the event listeners
 let slider = new Slider();

@@ -371,13 +371,28 @@ footer {
 }
 footer h2 { 
   color: var(--accent-primary);
-
+  font-size: 150%;
   width: calc(100% - 0.5em); height: auto;
   padding: 0.5em 0em 0.5em 0.5em;
   margin: 0px;
   position: absolute; top: 0;
   z-index: 1000;
   background-color: #33333390;
+  transition: all 0.5s var(--default-bezier);
+}
+footer h2:hover {font-size: 175%; transition: all 0.5s var(--default-bezier); color: var(--accent-secondary); cursor:pointer;}
+footer h2::after {  
+  color: var(--bg-primary);
+  content: ' << fullscreen >>';
+  font-size: 0px;
+  opacity: 0;
+  transition: all 0.5s var(--default-bezier);
+}
+footer h2:hover::after {
+
+  font-size: 50%;
+  opacity: 1;
+  transition: all 0.5s var(--default-bezier);
 }
 footer .bg {
   position: absolute;
