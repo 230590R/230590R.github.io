@@ -118,6 +118,9 @@ class Penguin {
     this.penguin.style.transform = pos;
     this.sprite.style.transform = "scale(" + this.flip + ", 1)";
 
+    // update the z index
+    this.penguin.style.zIndex = 200 + Math.floor(this.y);
+
     this.timer -= dt;
     if (this.timer <= 0)
       this.NewWaypoint();
@@ -127,7 +130,7 @@ class Penguin {
     let ww = window.innerWidth;
     this.tx = 0 + (Math.random() * ww);
     this.ty = 100 -(0.5 * 20) + (Math.random() * 40);
-    this.timer = 2;
+    this.timer = (15 + (Math.random() * 15)) / 10;
 
     this.flip = (this.x < this.tx) ? -1 : 1;
   }
